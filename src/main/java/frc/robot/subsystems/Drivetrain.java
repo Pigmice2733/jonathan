@@ -4,18 +4,18 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
-  TalonFX backright = new TalonFX(10);
-  TalonFX frontright = new TalonFX(11);
-  TalonFX frontleft = new TalonFX(12);
-  TalonFX backleft = new TalonFX(13);
+  TalonSRX backright = new TalonSRX(10);
+  TalonSRX frontright = new TalonSRX(11);
+  TalonSRX frontleft = new TalonSRX(12);
+  TalonSRX backleft = new TalonSRX(13);
   XboxController controller = new XboxController(0);
   double speed = 0.5;
 
@@ -35,10 +35,10 @@ public class Drivetrain extends SubsystemBase {
       turnspeed = 0;
       drivespeed = 0;
     }
-    backright.set(ControlMode.PercentOutput, drivespeed + turnspeed);
-    frontright.set(ControlMode.PercentOutput, drivespeed + turnspeed);
-    frontleft.set(ControlMode.PercentOutput, drivespeed - turnspeed);
-    backleft.set(ControlMode.PercentOutput, drivespeed - turnspeed);
+    backright.set(TalonSRXControlMode.PercentOutput, drivespeed + turnspeed);
+    frontright.set(TalonSRXControlMode.PercentOutput, drivespeed + turnspeed);
+    frontleft.set(TalonSRXControlMode.PercentOutput, drivespeed - turnspeed);
+    backleft.set(TalonSRXControlMode.PercentOutput, drivespeed - turnspeed);
   }
 
   @Override
