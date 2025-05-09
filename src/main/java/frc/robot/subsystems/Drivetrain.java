@@ -9,7 +9,9 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
   TalonSRX backright = new TalonSRX(10);
@@ -25,6 +27,8 @@ public class Drivetrain extends SubsystemBase {
     frontright.setInverted(false);
     backleft.setInverted(true);
     frontleft.setInverted(true);
+
+    Constants.sendNumberToElastic("Speed", speed, 3);
   }
 
   @Override
@@ -39,6 +43,12 @@ public class Drivetrain extends SubsystemBase {
     frontright.set(TalonSRXControlMode.PercentOutput, drivespeed + turnspeed);
     frontleft.set(TalonSRXControlMode.PercentOutput, drivespeed - turnspeed);
     backleft.set(TalonSRXControlMode.PercentOutput, drivespeed - turnspeed);
+
+    updateEntries();
+  }
+
+  private void updateEntries() {
+    speed = SmartDashboard.getNumber("Speed", 0);
   }
 
   @Override
