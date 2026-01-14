@@ -7,6 +7,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -41,6 +42,11 @@ public class Prototype extends SubsystemBase {
     public void setSpeeds() {
         motorOne.set(motorSpeed);
         motorTwo.set(motorSpeed);
+    }
+
+    public void incrementSpeed(double delta) {
+        motorSpeed+=delta;
+        motorSpeed = MathUtil.clamp(motorSpeed,-1.0,1.0);
     }
 
     public void setMotors(double speed) {
