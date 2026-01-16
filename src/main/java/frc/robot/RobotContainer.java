@@ -55,11 +55,12 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     operator.rightTrigger().onTrue(new InstantCommand(() -> prototype.incrementMotor(.1, true)));
-    operator.rightBumper().onTrue(new InstantCommand(() -> prototype.stopMotor(true)));
+    operator.rightBumper().onTrue(new InstantCommand(() -> prototype.incrementMotor(-.1, true)));
     operator.leftTrigger().onTrue(new InstantCommand(() -> prototype.incrementMotor(.1, false)));
-    operator.rightBumper().onTrue(new InstantCommand(() -> prototype.stopMotor(false)));
-    operator.a().onTrue(new InstantCommand(() -> prototype.incrementMotors(.1)));
-    operator.b().onTrue(new InstantCommand(() -> prototype.incrementMotors(-.1)));
+    operator.leftBumper().onTrue(new InstantCommand(() -> prototype.incrementMotor(-.1, false)));
+    operator.a().onTrue(new InstantCommand(() -> prototype.stopMotors()));
+    operator.x().onTrue(new InstantCommand(() -> prototype.incrementMotors(-.1)));
+    operator.y().onTrue(new InstantCommand(() -> prototype.incrementMotors(.1)));
   }
 
   /**

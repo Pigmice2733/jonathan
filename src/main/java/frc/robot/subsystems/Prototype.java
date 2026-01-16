@@ -37,6 +37,8 @@ public class Prototype extends SubsystemBase {
         Constants.sendNumberToElastic("Motor 2 Speed", motorTwo.get(), 3);
         Constants.sendNumberToElastic("Motor 1 Setpoint", motorOneSpeed, 3);
         Constants.sendNumberToElastic("Motor 2 Setpoint", motorTwoSpeed, 3);
+        Constants.sendNumberToElastic("Motor 1 RPM", motorOne.getEncoder().getVelocity(), 2);
+        Constants.sendNumberToElastic("Motor 2 RPM", motorTwo.getEncoder().getVelocity(), 2);
 
         // motorSpeed = SmartDashboard.getNumber("Motor Setpoint", 0);
     }
@@ -49,6 +51,11 @@ public class Prototype extends SubsystemBase {
         motorTwo.set(motorTwoSpeed);
     }
 
+    /**
+     * Changes the target speed of both motors by a given amount
+     * 
+     * @param delta The change in target speed
+     */
     public void incrementMotors(double delta) {
         motorOneSpeed += delta;
         motorTwoSpeed += delta;
@@ -74,6 +81,12 @@ public class Prototype extends SubsystemBase {
         motorTwoSpeed = 0;
     }
 
+    /**
+     * Sets the target speed of a given motor to a given value
+     * 
+     * @param speed    The target speed of the motor
+     * @param motorOne Which motor to set, with true being 1 and false being 2
+     */
     public void setMotor(double speed, boolean motorOne) {
         if (motorOne == true) {
             motorOneSpeed = speed;
@@ -82,6 +95,11 @@ public class Prototype extends SubsystemBase {
         }
     }
 
+    /**
+     * Sets the target speeed of a given motor to 0
+     * 
+     * @param motorOne Which motor to set, with true being 1 and false being 2
+     */
     public void stopMotor(boolean motorOne) {
         if (motorOne == true) {
             motorOneSpeed = 0;
@@ -90,6 +108,12 @@ public class Prototype extends SubsystemBase {
         }
     }
 
+    /**
+     * Changes the target speed of a given motor by a given amount
+     * 
+     * @param delta    The change in target speed
+     * @param motorOne Which motor to set, with true being 1 and false being 2
+     */
     public void incrementMotor(double delta, boolean motorOne) {
         if (motorOne == true) {
             motorOneSpeed += delta;
