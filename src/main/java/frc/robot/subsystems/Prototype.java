@@ -15,7 +15,8 @@ import frc.robot.Constants;
 public class Prototype extends SubsystemBase {
     SparkMax motorOne = new SparkMax(14, MotorType.kBrushless);
     SparkMax motorTwo = new SparkMax(15, MotorType.kBrushless);
-    double motorSpeed;
+    double motorOneSpeed;
+    double motorTwoSpeed;
 
     public Prototype() {
         motorOne.configure(new SparkMaxConfig().inverted(false).idleMode(IdleMode.kBrake),
@@ -34,26 +35,66 @@ public class Prototype extends SubsystemBase {
     private void updateEntries() {
         Constants.sendNumberToElastic("Motor 1 Speed", motorOne.get(), 3);
         Constants.sendNumberToElastic("Motor 2 Speed", motorTwo.get(), 3);
-        Constants.sendNumberToElastic("Motor Setpoint", motorSpeed, 3);
+        Constants.sendNumberToElastic("Motor 1 Setpoint", motorOneSpeed, 3);
+        Constants.sendNumberToElastic("Motor 2 Setpoint", motorTwoSpeed, 3);
 
         // motorSpeed = SmartDashboard.getNumber("Motor Setpoint", 0);
     }
 
+    /**
+     * Sets the speed of both motors to the target value
+     */
     public void setSpeeds() {
-        motorOne.set(motorSpeed);
-        motorTwo.set(motorSpeed);
+        motorOne.set(motorOneSpeed);
+        motorTwo.set(motorTwoSpeed);
     }
 
-    public void incrementSpeed(double delta) {
-        motorSpeed+=delta;
-        motorSpeed = MathUtil.clamp(motorSpeed,-1.0,1.0);
+    public void incrementMotors(double delta) {
+        motorOneSpeed += delta;
+        motorTwoSpeed += delta;
+        motorOneSpeed = MathUtil.clamp(motorOneSpeed, -1.0, 1.0);
+        motorTwoSpeed = MathUtil.clamp(motorTwoSpeed, -1.0, 1.0);
     }
 
+    /**
+     * Sets the target speed of both motors
+     * 
+     * @param speed The target speed
+     */
     public void setMotors(double speed) {
-        motorSpeed = speed;
+        motorOneSpeed = speed;
+        motorTwoSpeed = speed;
     }
 
+    /**
+     * Sets the target speed of both motors to 0
+     */
     public void stopMotors() {
-        motorSpeed = 0;
+        motorOneSpeed = 0;
+        motorTwoSpeed = 0;
+    }
+
+    public void setMotor(double speed, boolean motorOne) {
+        if (motorOne == true) {
+            motorOneSpeed = speed;
+        } else {
+            motorTwoSpeed = speed;
+        }
+    }
+
+    public void stopMotor(boolean motorOne) {
+        if (motorOne == true) {
+            motorOneSpeed = 0;
+        } else {
+            motorTwoSpeed = 0;
+        }
+    }
+
+    public void incrementMotor(double delta, boolean motorOne) {
+        if (motorOne == true) {
+            motorOneSpeed += delta;
+        } else {
+            motorTwoSpeed += delta;
+        }
     }
 }

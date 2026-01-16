@@ -54,9 +54,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    operator.rightTrigger().onTrue(new InstantCommand(() -> prototype.incrementSpeed(.21)));
-    operator.leftTrigger().onTrue(new InstantCommand(() -> prototype.incrementSpeed(-0.1)));
-    operator.rightBumper().onTrue(new InstantCommand(() -> prototype.stopMotors()));
+    operator.rightTrigger().onTrue(new InstantCommand(() -> prototype.incrementMotor(.1, true)));
+    operator.rightBumper().onTrue(new InstantCommand(() -> prototype.stopMotor(true)));
+    operator.leftTrigger().onTrue(new InstantCommand(() -> prototype.incrementMotor(.1, false)));
+    operator.rightBumper().onTrue(new InstantCommand(() -> prototype.stopMotor(false)));
+    operator.a().onTrue(new InstantCommand(() -> prototype.incrementMotors(.1)));
+    operator.b().onTrue(new InstantCommand(() -> prototype.incrementMotors(-.1)));
   }
 
   /**
