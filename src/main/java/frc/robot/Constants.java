@@ -19,8 +19,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
   public static void sendNumberToElastic(String name, double num, double places) {
     double newNum = Math.round(num * Math.pow(10, places)) / Math.pow(10, places);
     SmartDashboard.putNumber(name, newNum);
+  }
+
+  public static final class PrototypeConfig {
+    public static final int MOTOR_ONE_ID = 14;
+    public static final int MOTOR_TWO_ID = 15;
   }
 }
