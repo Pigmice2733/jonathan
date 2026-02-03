@@ -17,7 +17,7 @@ public class PrototypeNeo extends SubsystemBase {
     public PrototypeNeo(int id, MotorType type, boolean inverted, IdleMode idleMode, ResetMode resetMode,
             PersistMode persistMode) {
         motor = new SparkMax(id, type);
-        motor.configure(new SparkMaxConfig().inverted(inverted).idleMode(IdleMode.kBrake), resetMode, persistMode);
+        motor.configure(new SparkMaxConfig().inverted(inverted).idleMode(IdleMode.kCoast), resetMode, persistMode);
     }
 
     public void setSpeed() {
